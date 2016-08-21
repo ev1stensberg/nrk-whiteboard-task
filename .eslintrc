@@ -1,0 +1,12 @@
+{
+  "extends": "airbnb",
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+  "new-cap": 0,
+  "global-require": 0,
+  "no-shadow": 1,
+  "no-else-return": 0
+  }
+}
