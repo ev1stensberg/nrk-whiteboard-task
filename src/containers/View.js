@@ -8,6 +8,7 @@ import shortid from 'shortid';
  * so we can set the initialState to what componentDidMount fetches
  */
 const pairs = [];
+let counter = 0;
 
 class View extends Component {
   constructor() {
@@ -29,7 +30,8 @@ class View extends Component {
     const { reduxData } = this.props;
     // after iterating over newState, we push the right values to the array
     const filterPair = [];
-
+    // so we can sort by alphabetical order
+    ++counter;
     reduxData.forEach((pair) => {
       let keyVal;
 
@@ -103,15 +105,27 @@ class View extends Component {
       );
     });
       // Now, we can sort the array, based on the right keys
-    filterPair.sort((a, b) => {
-      if (a.key < b.key) {
-        return - 1;
-      }
-      if (a.key > b.key) {
+    if (counter % 2 === 0) {
+      filterPair.sort((a, b) => {
+        if (a.key > b.key) {
+          return 1;
+        }
+        if (a.key < b.key) {
+          return -1;
+        }
+        return 0;
+      });
+    } else {
+      filterPair.sort((a, b) => {
+        if (a.key > b.key) {
+          return -1;
+        }
+        if (a.key < b.key) {
+          return 1;
+        }
         return 1;
-      }
-      return 0;
-    });
+      });
+    }
     // set the current state to show our filtered data
     return this.setState({ data: filterPair });
   }

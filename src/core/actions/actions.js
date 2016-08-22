@@ -29,7 +29,7 @@ export function fetchDataFromSSB(data) {
 
   return dispatch => {
     dispatch(requestData(data));
-    return fetch(`http://data.ssb.no/api/v0/dataset/${id}.json?lang=no`)
+    return fetch(`https://data.ssb.no/api/v0/dataset/${id}.json?lang=no`)
 
       .then(response => response.json())
       .then(json => dispatch(receiveData(data, JSONstat(json))));
